@@ -3,7 +3,7 @@ seed-inventario.js
 seed.js
 
 node_modules/
-
+.env
 
 npm-debug.log*
 yarn-debug.log*
