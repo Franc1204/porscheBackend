@@ -9,26 +9,16 @@ const app = express();
 
 connectDB(); 
 
-app.use(cors({
-  origin: ['http://localhost:80', 'http://127.0.0.1:80'],
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true
-}));
+// CORS configuration
+app.use(cors(corsOptions));
 
 app.use(express.json());
 
-const staticOptions = {
-  setHeaders: (res, path) => {
-    res.set('Access-Control-Allow-Origin', '*');
-  }
-};
-
-app.use('/assets', express.static(path.join(__dirname, 'public/assets'), staticOptions));
+app.use('/assets', express.static(path.join(__dirname, 'public/assets')));
 
 app.use("/api/modelos", require("./routes/modeloRoutes"));
 app.use("/api/usuarios", require("./routes/usuarioRoutes"));
 app.use("/api/pedidos", require("./routes/pedidoRoutes"));
-app.use("/api/perfil", require("./routes/perfilRoutes"));
 app.use("/api/inventario", require("./routes/inventarioRoutes"));
 
 app.use(errorHandler);
